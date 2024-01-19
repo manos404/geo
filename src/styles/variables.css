@@ -1,0 +1,21 @@
+:root {
+  /* Colours */
+
+  --colour-light-blue: #68a0cc;
+  --colour-night-blue: #41647f;
+  --colour-beige: #e5e3db;
+  --colour-orange: #f2884b;
+
+  --colour-dark-blue:#0E4A73;
+  --colour-yellow:#FAC938;
+  --colour-white:#FFFFFF;
+
+  --colour-black: #000000;
+  --colour-gray: #B4B4B4;
+  --colour-white-transparent:#FFFFFF, 20% opacity;
+
+  --font-heading:  'Dela Gothic One', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+   
+
+}

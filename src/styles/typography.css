@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Poppins:wght@400&display=swap");
+
+/* Fonts */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  margin-block: 0;
+  line-height: 1.1;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 36px;
+}
+h2 {
+  font-weight: 500;
+  font-size: 24px;
+}
+h3 {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+p,
+.p--lg {
+  font-size: 14px;
+}
+.p--m {
+  font-size: 14px;
+}
+/* .p--sm {
+    font-size: 14px; 
+  } */
+
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 30px;
+  }
+
+  p,
+  .p--lg {
+    font-size: 20px;
+  }
+  .p--m {
+    font-size: 16px;
+  }
+  .p--sm {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  h3 {
+    font-size: 20px;
+  }
+}
