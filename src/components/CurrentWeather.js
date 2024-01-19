@@ -4,8 +4,6 @@ import styled from "styled-components";
 const Div = styled.div`
   display: grid;
   grid-template-columns: 50px 1fr;
-
-  // flex-direction: column;
   justify-items: center;
   padding: 20px 50px 33px;
   border: 2px solid var(--colour-black);
