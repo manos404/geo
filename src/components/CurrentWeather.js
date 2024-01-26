@@ -1,41 +1,110 @@
 import { useState } from "react";
 import styled from "styled-components";
+import sss from "../images/sun.png";
 
 const Div = styled.div`
   display: grid;
-  grid-template-columns: 50px 1fr;
-  justify-items: center;
-  padding: 20px 50px 33px;
+  grid-column: 1/3;
+  grid-template-rows: auto 1fr 1fr;
+  width: 90%;
+
+  min-width: 300px;
+ //
+  padding: 10px;
   border: 2px solid var(--colour-black);
+
+  //justify-content: space-around;
+
+  @media screen and (min-width: 600px) {
+    margin-top: 64px;
+  }
+  @media screen and (min-width: 1200px) {
+      max-width: 50%;
+  }
 `;
 
+const DivH2 = styled.div`
+  writing-mode: vertical-rl; /* Κείμενο κατακόρυφα, από δεξιά προς τα αριστερά */
+  text-orientation: upright;
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  border: 5px solid var(--colour-black);
+  padding-bottom: 10px;
+  justify-content: space-around;
+`;
 const H2 = styled.h2`
-  grid-column: 1/2;
-  width: 50px;
-`;
-const CurrentWeatherImage = styled.img`
-  grid-column: 2/3;
-  width: 250px;
-  padding: 30px 50px;
+  margin: 0;
+  text-align: center;
+
+  @media screen and (min-width: 600px) {
+    // margin-left: 71px;
+  }
 `;
 
-export default function CurrentWeather({ currentWeatherData }) {
-  const text = currentWeatherData.weather;
+const CurrentWeatherImage = styled.img`
+  width: 100%;
+  min-width: 250px;
+  object-fit: cover;
+  margin-left: 10px;
+
+  @media screen and (min-width: 600px) {
+    margin-left: 30px;
+  }
+`;
+
+const DivImg = styled.div`
+  width: calc(90%);
+  border: 3px solid var(--colour-black);
+  grid-column: 2/3;
+
+  // @media screen and (min-width: 600px) {
+  //   width: calc(60%);
+  // }
+  // @media screen and (min-width: 850px) {
+  //   width: calc(50%);
+  // }
+  // @media screen and (min-width: 1050px) {
+  //   width: calc(40%);
+  // }
+  // @media screen and (min-width: 1300px) {
+  //   width: calc(35%);
+  // }
+`;
+
+const Img = styled.img`
+  width: 100%;
+`;
+const Temp = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 3px solid var(--colour-black);
+  grid-column: 1/3;
+  width: 100%;
+`;
+
+export default function CurrentWeather({ weatherData }) {
+   console.log(weatherData.list[0]);
+  // console.log(weatherData.weather[0].main.temp);
+  // console.log(weatherData.main.feels_like);
 
   return (
     <Div>
-      <div>
-        {text.split("").map((letter, index) => (
-          <H2 key={index} style={{ margin: "0", textAlign: "center" }}>
-            {letter !== " " ? letter : "\u00A0"}
-          </H2>
-        ))}
-      </div>
-
-      <CurrentWeatherImage
-        src="https://scontent.fher2-1.fna.fbcdn.net/v/t39.30808-6/419249872_399146042638928_6877712532934668813_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_ohc=X1zXI93sWA8AX8J1Ps9&_nc_ht=scontent.fher2-1.fna&oh=00_AfAXnh5Qfy1hWJ2p9t_AfJfbN4ck9olr4XhPm6Pwbdaa0A&oe=65AEDB0B"
-        alt="Weather img"
-      />
+      <DivH2>
+        <H2>{weatherData.list[0].weather[0].description}</H2>
+      </DivH2>
+      <DivImg>
+        <CurrentWeatherImage src={sss} alt="Weather img" />
+      </DivImg>
+      <Temp>
+        <p> TEMPERATURE</p>
+        <h1>{Math.floor(weatherData.list[0].main.temp)}°C</h1>
+      </Temp>
+      <Temp>
+        <p> FEELS LIKE</p>
+        <h2>{Math.floor(weatherData.list[0].main.feels_like)}°C</h2>
+      </Temp>
     </Div>
   );
 }
