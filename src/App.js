@@ -21,7 +21,7 @@ const Section = styled.section`
   }
 `;
 function App() {
-  const [weatherData, setWeatherData] = useState({ a: 0 });
+  const [weatherData, setWeatherData] = useState({});
   const [city, setCity] = useState("");
   console.log("app");
   const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=03743e7ef23f3b59fd9b137e2fe8a91e&units=metric`;
@@ -34,8 +34,9 @@ function App() {
           throw new Error("Failed");
         }
         const fetchedData = await response.json();
-        setWeatherData(fetchedData );
-       // console.log(fetchedData);
+        setWeatherData(fetchedData.list);
+        console.log("fetchedData");
+        console.log(fetchedData);
       } catch (error) {
         console.log(error);
       }
@@ -46,22 +47,49 @@ function App() {
   }, [city]);
 
   function createH1ElementsFromArray(weatherData) {
-    const data=weatherData.list.slice(1, 8)
-   // console.log( data );
-    return data.map((item, index) => (
-      <AllDayWeather key={index} list={item} /> 
-       
-    ));
+    const data = weatherData.list.slice(1, 8);
+    // console.log( data );
+    return data.map((item, index) => <AllDayWeather key={index} list={item} />);
+  }
+
+  function getColor(weatherDescription) {
+    const description = weatherDescription.toLowerCase();
+    switch (description) {
+      case "clear":
+        return getComputedStyle(document.documentElement).getPropertyValue(
+          "--colour-orange"
+        );
+      case "clouds":
+        return getComputedStyle(document.documentElement).getPropertyValue(
+          "--colour-beige"
+        );
+      case "rain":
+      case "storm":
+        return getComputedStyle(document.documentElement).getPropertyValue(
+          "--colour-light-blue"
+        );
+        
+        break;
+
+      default:
+        break;
+    }
   }
 
   return (
-    <Section>
+    <Section
+      style={{
+        backgroundColor: getColor(
+          weatherData.length > 0 ? weatherData[0].weather[0].main : ""
+        ),
+      }}
+    >
       <Search setCity={setCity} />
 
-      {weatherData.a === 0 ? (
-        <EmptyState />
+      {weatherData && weatherData.length > 0 ? (
+        <CurrentWeather weatherData={weatherData} />
       ) : (
-        <CurrentWeather weatherData={weatherData}/> 
+        <EmptyState />
         // createH1ElementsFromArray(weatherData)
       )}
     </Section>

@@ -1,12 +1,11 @@
 import React from "react";
 
-import emptyIcon from "../images/empty-state-icon.png";
+import emptyIcon from "../images/emptyStateIcon.png";
 import styled from "styled-components";
 
 const Section = styled.section`
   grid-column: 1/3;
   grid-row: 2/4;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +21,7 @@ const Section = styled.section`
 
 const Div = styled.div`
   width: calc(80%);
- 
+
   border: 3px solid var(--colour-black);
 
   @media screen and (min-width: 600px) {
@@ -43,11 +42,7 @@ const Img = styled.img`
   width: 100%;
 `;
 
-
-
-
 export default function EmptyState() {
-  
   return (
     <Section>
       <Div>

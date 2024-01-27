@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import sss from "../images/sun.png";
+import sss from "../images/clearLargeDay.png";
+
+import WeatherState from "./WeatherState";
 
 const Div = styled.div`
   display: grid;
@@ -9,7 +11,7 @@ const Div = styled.div`
   width: 90%;
 
   min-width: 300px;
- //
+  //
   padding: 10px;
   border: 2px solid var(--colour-black);
 
@@ -19,7 +21,7 @@ const Div = styled.div`
     margin-top: 64px;
   }
   @media screen and (min-width: 1200px) {
-      max-width: 50%;
+    max-width: 50%;
   }
 `;
 
@@ -42,16 +44,16 @@ const H2 = styled.h2`
   }
 `;
 
-const CurrentWeatherImage = styled.img`
-  width: 100%;
-  min-width: 250px;
-  object-fit: cover;
-  margin-left: 10px;
+// const CurrentWeatherImage = styled.img`
+//   width: 100%;
+//   min-width: 250px;
+//   object-fit: cover;
+//   margin-left: 10px;
 
-  @media screen and (min-width: 600px) {
-    margin-left: 30px;
-  }
-`;
+//   @media screen and (min-width: 600px) {
+//     margin-left: 30px;
+//   }
+// `;
 
 const DivImg = styled.div`
   width: calc(90%);
@@ -85,25 +87,25 @@ const Temp = styled.div`
 `;
 
 export default function CurrentWeather({ weatherData }) {
-   console.log(weatherData.list[0]);
+  console.log(weatherData[0]);
   // console.log(weatherData.weather[0].main.temp);
   // console.log(weatherData.main.feels_like);
 
   return (
     <Div>
       <DivH2>
-        <H2>{weatherData.list[0].weather[0].description}</H2>
+        <H2>{weatherData[0].weather[0].description}</H2>
       </DivH2>
       <DivImg>
-        <CurrentWeatherImage src={sss} alt="Weather img" />
+        <WeatherState weatherId={weatherData[0].weather[0].id}/>
       </DivImg>
       <Temp>
         <p> TEMPERATURE</p>
-        <h1>{Math.floor(weatherData.list[0].main.temp)}°C</h1>
+        <h1>{Math.floor(weatherData[0].main.temp)}°C</h1>
       </Temp>
       <Temp>
         <p> FEELS LIKE</p>
-        <h2>{Math.floor(weatherData.list[0].main.feels_like)}°C</h2>
+        <h2>{Math.floor(weatherData[0].main.feels_like)}°C</h2>
       </Temp>
     </Div>
   );

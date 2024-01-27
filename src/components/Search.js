@@ -77,7 +77,7 @@ export default function Search({ setCity }) {
         onChange={(e) => {
           setCitySearch(e.target.value);
         }}
-      />
+      />  
       <Button onClick={handleClick}>Search</Button>
     </Div>
   );
