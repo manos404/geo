@@ -1,112 +1,118 @@
 import { useState } from "react";
 import styled from "styled-components";
 import sss from "../images/clearLargeDay.png";
-
+import Lottie from "lottie-react";
 import WeatherState from "./WeatherState";
 
-const Div = styled.div`
-  display: grid;
-  grid-column: 1/3;
-  grid-template-rows: auto 1fr 1fr;
-  width: 90%;
+import clearDayAnim from "../images/animated-icons/day/clear.json";
+import cloudyDayAnim from "../images/animated-icons/day/cloudy.json";
+import foggyDayAnim from "../images/animated-icons/day/foggy.json";
+import rainyDayAnim from "../images/animated-icons/day/rainy.json";
+import snowyDayAnim from "../images/animated-icons/day/snowy.json";
+import stormyDayAnim from "../images/animated-icons/day/stormy.json";
+import veryCloudyDayAnim from "../images/animated-icons/day/very_cloudy.json";
+import veryRainyDayAnim from "../images/animated-icons/day/very_rainy.json";
 
-  min-width: 300px;
-  //
-  padding: 10px;
-  border: 2px solid var(--colour-black);
+import clearNightAnim from "../images/animated-icons/night/clear.json";
+import cloudyNightAnim from "../images/animated-icons/night/cloudy.json";
+import foggyNightAnim from "../images/animated-icons/night/foggy.json";
+import rainyNightAnim from "../images/animated-icons/night/rainy.json";
+import snowyNightAnim from "../images/animated-icons/night/snowy.json";
+import stormyNightAnim from "../images/animated-icons/night/stormy.json";
+import veryCloudyNightAnim from "../images/animated-icons/night/very_cloudy.json";
+import veryRainyNightAnim from "../images/animated-icons/night/very_rainy.json";
 
-  //justify-content: space-around;
-
-  @media screen and (min-width: 600px) {
-    margin-top: 64px;
-  }
-  @media screen and (min-width: 1200px) {
-    max-width: 50%;
-  }
+const SectionCurrentWeather = styled.div`
+  grid-column: 1/2;
+  grid-row: 2/3;
 `;
-
-const DivH2 = styled.div`
-  writing-mode: vertical-rl; /* Κείμενο κατακόρυφα, από δεξιά προς τα αριστερά */
-  text-orientation: upright;
+const WeatherOverview = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 70px;
-  border: 5px solid var(--colour-black);
-  padding-bottom: 10px;
-  justify-content: space-around;
-`;
-const H2 = styled.h2`
-  margin: 0;
-  text-align: center;
+  flex-direction: row;
+  gap: 80px;
+  margin-bottom: 40px;
 
-  @media screen and (min-width: 600px) {
-    // margin-left: 71px;
-  }
-`;
+  // grid-template-rows: auto 1fr 1fr;
 
-// const CurrentWeatherImage = styled.img`
-//   width: 100%;
-//   min-width: 250px;
-//   object-fit: cover;
-//   margin-left: 10px;
+  // padding: 10px;
+  // border: 2px solid var(--colour-black);
 
-//   @media screen and (min-width: 600px) {
-//     margin-left: 30px;
-//   }
-// `;
-
-const DivImg = styled.div`
-  width: calc(90%);
-  border: 3px solid var(--colour-black);
-  grid-column: 2/3;
+  // //justify-content: space-around;
 
   // @media screen and (min-width: 600px) {
-  //   width: calc(60%);
+  //   margin-top: 64px;
   // }
-  // @media screen and (min-width: 850px) {
-  //   width: calc(50%);
-  // }
-  // @media screen and (min-width: 1050px) {
-  //   width: calc(40%);
-  // }
-  // @media screen and (min-width: 1300px) {
-  //   width: calc(35%);
+  // @media screen and (min-width: 1200px) {
+  //   max-width: 50%;
   // }
 `;
 
-const Img = styled.img`
+const H2 = styled.h2`
+  writing-mode: vertical-rl; /* Κείμενο κατακόρυφα, από δεξιά προς τα αριστερά */
+  text-orientation: upright;
+`;
+
+const DivIconWrapper = styled.div`
+  border-top: 2px solid var(--colour-black);
+  padding-top: 40px;
   width: 100%;
 `;
+
 const Temp = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 3px solid var(--colour-black);
-  grid-column: 1/3;
-  width: 100%;
+`;
+const P = styled.p`
+  color: var(--colour-gray);
 `;
 
-export default function CurrentWeather({ weatherData }) {
+export default function CurrentWeather({ weatherData, isDayTime }) {
   console.log(weatherData[0]);
-  // console.log(weatherData.weather[0].main.temp);
-  // console.log(weatherData.main.feels_like);
+
+  const getAnimatedIcon = (weatherId, isDayTime) => {
+    if (weatherId > 200 && weatherId <= 232) {
+      return isDayTime ? stormyDayAnim : stormyNightAnim;
+    } else if (weatherId > 300 && weatherId <= 501) {
+      return isDayTime ? rainyDayAnim : rainyNightAnim;
+    } else if (weatherId > 501 && weatherId <= 531) {
+      return isDayTime ? veryRainyDayAnim : veryRainyNightAnim;
+    } else if (weatherId >= 600 && weatherId <= 622) {
+      return isDayTime ? snowyDayAnim : snowyNightAnim;
+    } else if (weatherId >= 701 && weatherId <= 781) {
+      return isDayTime ? foggyDayAnim : foggyNightAnim;
+    } else if (weatherId === 800) {
+      return isDayTime ? clearDayAnim : snowyNightAnim;
+    } else if (weatherId === 801 || weatherId === 802) {
+      return isDayTime ? cloudyDayAnim : cloudyNightAnim;
+    } else if (weatherId === 803 || weatherId === 804) {
+      return isDayTime ? veryCloudyDayAnim : veryCloudyNightAnim;
+    } else {
+      return clearDayAnim;
+    }
+  };
 
   return (
-    <Div>
-      <DivH2>
+    <SectionCurrentWeather>
+      <WeatherOverview>
         <H2>{weatherData[0].weather[0].description}</H2>
-      </DivH2>
-      <DivImg>
-        <WeatherState weatherId={weatherData[0].weather[0].id}/>
-      </DivImg>
+
+        <DivIconWrapper>
+          <Lottie
+            animationData={getAnimatedIcon(weatherData[0].weather[0].id,isDayTime)}
+            loop={true}
+          />
+        </DivIconWrapper>
+      </WeatherOverview>
+
       <Temp>
-        <p> TEMPERATURE</p>
+        <P> TEMPERATURE</P>
         <h1>{Math.floor(weatherData[0].main.temp)}°C</h1>
       </Temp>
       <Temp>
-        <p> FEELS LIKE</p>
+        <P> FEELS LIKE</P>
         <h2>{Math.floor(weatherData[0].main.feels_like)}°C</h2>
       </Temp>
-    </Div>
+    </SectionCurrentWeather>
   );
 }

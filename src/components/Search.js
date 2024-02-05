@@ -1,52 +1,57 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const Div = styled.div`
-  width: 380px;
-  grid-row: 1/2;
+const SearchSection = styled.section`
+  // width: 380px;
   grid-column: 1/3;
+  grid-row: 1/2;
   //border: 5px solid var(--colour-black);
-  height: 35px;
-  margin-left: 34px;
+  // height: 35px;
+  // margin-left: 34px;
 
   @media screen and (min-width: 600px) {
-    margin-left: 101px;
-    width: 418px;
-    height: 39px;
+    //margin-left: 101px;
+    // width: 418px;
+    // height: 39px;
   }
   @media screen and (min-width: 1200px) {
   }
 `;
 
+const InputWrapper = styled.div`
+  display: flex;
+  gap: 28px;
+  margin-bottom: 16px;
+`;
+
 const Input = styled.input`
-  width: 190px;
-  height: 100%;
+  height: 40px;
+  max-height: 40px;
+  padding-inline: 24px;
   margin: 0; /* Μηδενισμός των περιθωρίων */
   box-sizing: border-box;
-  border-radius: 50px;
+  border-radius: 40px;
   background-color: transparent;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--font-body);
+
   padding-left: 10px;
+
   @media screen and (min-width: 600px) {
-    width: 294px;
+    // width: 294px;
   }
 `;
 const Button = styled.button`
-  margin: 0; /* Μηδενισμός των περιθωρίων */
-  box-sizing: border-box;
-
-  margin-left: 28px;
-
-  width: 90px;
-  height: 100%;
+  font-size: 16px;
   background-color: rgba(0, 0, 0, 0);
-  border-radius: 20px;
-  // padding: 10px 15px;
-  //margin-left: 30px;
-  transition: background-color 0.3s;
-  //font-size: 17px;
+  margin: 0;
+  padding-inline: 24px;
+  min-height: 40px;
+  height: 40px;
+  border-radius: 40px;
+  //border: 2px solid #fff;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--colour-black);
@@ -58,12 +63,17 @@ const Button = styled.button`
   }
 
   @media screen and (min-width: 600px) {
-    width: 97px;
-    margin-left: 27px;
+    // width: 97px;
+    // margin-left: 27px;
   }
 `;
 
-export default function Search({ setCity }) {
+const ErrorMessage=styled.p`
+color: var(--colour-orange);
+font-size:var( p--m);
+`
+
+export default function Search({ setCity,error }) {
   const [citySearch, setCitySearch] = useState("");
 
   const handleClick = () => {
@@ -71,14 +81,17 @@ export default function Search({ setCity }) {
   };
 
   return (
-    <Div>
-      <Input
-        placeholder="Search for a city"
-        onChange={(e) => {
-          setCitySearch(e.target.value);
-        }}
-      />  
-      <Button onClick={handleClick}>Search</Button>
-    </Div>
+    <SearchSection>
+      <InputWrapper>
+        <Input
+          placeholder="Search for a city"
+          onChange={(e) => {
+            setCitySearch(e.target.value);
+          }}
+        />
+        <Button onClick={handleClick}>Search</Button>
+      </InputWrapper>
+      <ErrorMessage>{error}</ErrorMessage>
+    </SearchSection>
   );
 }
