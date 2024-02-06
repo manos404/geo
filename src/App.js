@@ -9,6 +9,7 @@ import AllDayWeather from "./components/AllDayWeather";
 
 const Section = styled.section`
   display: grid;
+  //overflow: hidden;
   box-sizing: border-box;
   min-height: 100vh;
   max-width: 100vw;
@@ -16,7 +17,7 @@ const Section = styled.section`
   grid-template-rows: 100px 1fr 1fr;
 
   border: 3px solid var(--colour-yellow);
-  padding: 30px;
+  padding-top: 30px;
   background-color: var(--colour-beige);
 
   @media screen and (min-width: 768px) {
@@ -97,9 +98,9 @@ function App() {
     setIsDayTime(true);
   };
 
-  function getColor(weatherDescription ) {
+  function getColor(weatherDescription) {
     const description = weatherDescription.toLowerCase();
-   console.log(isDayTime);
+    console.log(isDayTime);
     if (isDayTime) {
       switch (description) {
         case "clear":
@@ -118,7 +119,7 @@ function App() {
         default:
           break;
       }
-    }else{
+    } else {
       return getComputedStyle(document.documentElement).getPropertyValue(
         "--colour-night-blue"
       );
@@ -136,7 +137,7 @@ function App() {
       <Search setCity={setCity} error={error} />
 
       {weatherData && weatherData.length > 0 ? (
-        <CurrentWeather weatherData={weatherData} isDayTime={isDayTime}/>
+        <CurrentWeather weatherData={weatherData} isDayTime={isDayTime} />
       ) : (
         <EmptyState />
         // createH1ElementsFromArray(weatherData)

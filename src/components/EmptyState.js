@@ -9,6 +9,8 @@ const Wrapper = styled.section`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  width: 100%;
+  //padding:30px;
   // grid-row: 2/4;
   border: 3px solid var(--colour-black);
 `;
@@ -16,7 +18,7 @@ const Wrapper = styled.section`
 export default function EmptyState() {
   return (
     <Wrapper>
-      <img style={{ width: "450px" }} src={emptyIcon} />
+      <img src={emptyIcon} />
 
       <h2>Search for a city</h2>
     </Wrapper>

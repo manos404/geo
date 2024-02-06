@@ -25,11 +25,16 @@ import veryRainyNightAnim from "../images/animated-icons/night/very_rainy.json";
 const SectionCurrentWeather = styled.div`
   grid-column: 1/2;
   grid-row: 2/3;
+ // width:100%;
+  //padding-left:35px;
+  //padding-right:35px;
+  margin-left:10px;
+  margin-right:30px;
 `;
 const WeatherOverview = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 80px;
+  gap: 20px;
   margin-bottom: 40px;
 
   // grid-template-rows: auto 1fr 1fr;
@@ -55,7 +60,7 @@ const H2 = styled.h2`
 const DivIconWrapper = styled.div`
   border-top: 2px solid var(--colour-black);
   padding-top: 40px;
-  width: 100%;
+ 
 `;
 
 const Temp = styled.div`

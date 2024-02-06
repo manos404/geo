@@ -5,6 +5,9 @@ const SearchSection = styled.section`
   // width: 380px;
   grid-column: 1/3;
   grid-row: 1/2;
+  margin-left:30px;
+  margin-right:30px;
+  //padding-left:10px;
   //border: 5px solid var(--colour-black);
   // height: 35px;
   // margin-left: 34px;
@@ -26,6 +29,7 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   height: 40px;
+  width:165px;
   max-height: 40px;
   padding-inline: 24px;
   margin: 0; /* Μηδενισμός των περιθωρίων */
@@ -33,7 +37,7 @@ const Input = styled.input`
   border-radius: 40px;
   background-color: transparent;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 13px;
   font-family: var(--font-body);
 
   padding-left: 10px;
@@ -43,10 +47,11 @@ const Input = styled.input`
   }
 `;
 const Button = styled.button`
-  font-size: 16px;
+  font-size: 13px;
+  width:80px;
   background-color: rgba(0, 0, 0, 0);
   margin: 0;
-  padding-inline: 24px;
+  //padding-inline: 24px;
   min-height: 40px;
   height: 40px;
   border-radius: 40px;
