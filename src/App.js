@@ -162,7 +162,7 @@ function App() {
         <EmptyState />
         // createH1ElementsFromArray(weatherData)
       )}
-      <AllDayWeather list={weatherData}  />
+     {weatherData && weatherData.length > 0 && <AllDayWeather list={weatherData}  />}
       
     </Section>
   );
