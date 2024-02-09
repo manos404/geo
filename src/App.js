@@ -14,9 +14,9 @@ const Section = styled.section`
   min-height: 100vh;
   max-width: 100vw;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr 1fr;
+  grid-template-rows: 100px 1fr 21fr;
 
-  border: 3px solid var(--colour-yellow);
+  //border: 3px solid var(--colour-yellow);
   padding-top: 30px;
   background-color: var(--colour-beige);
 
@@ -162,7 +162,7 @@ function App() {
         <EmptyState />
         // createH1ElementsFromArray(weatherData)
       )}
-     {weatherData && weatherData.length > 0 && <AllDayWeather list={weatherData}  />}
+     {weatherData && weatherData.length > 0 && <AllDayWeather list={weatherData} isDayTime={isDayTime} />}
       
     </Section>
   );

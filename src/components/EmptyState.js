@@ -12,7 +12,7 @@ const Wrapper = styled.section`
   width: 100%;
   //padding:30px;
   // grid-row: 2/4;
-  border: 3px solid var(--colour-black);
+  //border: 3px solid var(--colour-black);
 `;
 
 export default function EmptyState() {
