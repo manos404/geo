@@ -32,7 +32,7 @@ const Section = styled.section`
 const TemperatureWrapper = styled.div`
   display: flex;
   flex-direction: column;
- // margin-left: 10px;
+  // margin-left: 10px;
 `;
 
 export default function AllDayWeather({ list, isDayTime }) {
@@ -68,21 +68,24 @@ export default function AllDayWeather({ list, isDayTime }) {
       let temp = item.main.temp;
       let tempFeel = item.main.feels_like;
       let icon = getIcon(item.weather[0].id, isDayTime);
-      let aaaa = getComputedStyle(document.documentElement).getPropertyValue(
-        "--colour-white-transparent"
-      );
+      let aaaa =
+        index % 2 === 0
+          ? getComputedStyle(document.documentElement).getPropertyValue(
+              "--colour-white-transparent"
+            )
+          : "";
 
       return (
         <div
           style={{
-          //width: "100%",
+            //width: "100%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             marginBottom: "15px",
             backgroundColor: aaaa,
-            paddingLeft: '10px',
-          paddingRight: '30px'
+            paddingLeft: "10px",
+            paddingRight: "30px",
           }}
         >
           <TemperatureWrapper>
