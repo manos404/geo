@@ -35,7 +35,7 @@ const WeatherOverview = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
-  margin-bottom: 40px;
+  //margin-bottom: 40px;
 
   // grid-template-rows: auto 1fr 1fr;
 

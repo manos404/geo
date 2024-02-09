@@ -1,7 +1,7 @@
 import "./styles/main.css";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-
+import { DateTime } from "luxon";
 import Search from "./components/Search";
 import CurrentWeather from "./components/CurrentWeather";
 import EmptyState from "./components/EmptyState";
@@ -37,11 +37,23 @@ function App() {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [isDayTime, setIsDayTime] = useState(true);
-  console.log("app");
+  //console.log("app");
 
   const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=03743e7ef23f3b59fd9b137e2fe8a91e&units=metric`;
 
-  useEffect(() => {
+  function time1(dt, timezone, dttxt) {
+    console.log("time");
+    console.log(dt);
+    console.log(timezone);
+    console.log(dttxt);
+    let format = "hh:mm a";
+    let a = DateTime.fromSeconds(dt).setZone(timezone).toFormat(format);
+    console.log(a);
+    let b = DateTime.fromISO("2024-02-07 12:00:00").toFormat("yyyy LLL dd");
+    console.log(b);
+  }
+
+  useEffect(() => { 
     const fetchWeatherData = async () => {
       try {
         if (city && city.length > 3) {
@@ -55,9 +67,17 @@ function App() {
           }
           setError(null);
           const fetchedData = await response.json();
+          //console.log(fetchedData);
           setWeatherData(fetchedData.list);
-          console.log("fetchedData");
+          // console.log("fetchedData");
           console.log(fetchedData);
+          // console.log(fetchedData.city.timezone);
+          // console.log(fetchedData.list[0].dt);
+          let timezone = fetchedData.city.timezone;
+          let dt = fetchedData.list[0].dt;
+          let dttxt = fetchedData.list[0].dt_txt;
+         // time1(dt, timezone, dttxt);
+          // time();city.timezone
         } else if (city && city.length <= 3) {
           setWeatherData([]);
           setError("The city must be longer than 3 characters.");
@@ -100,7 +120,7 @@ function App() {
 
   function getColor(weatherDescription) {
     const description = weatherDescription.toLowerCase();
-    console.log(isDayTime);
+    //console.log(isDayTime);
     if (isDayTime) {
       switch (description) {
         case "clear":
@@ -134,7 +154,7 @@ function App() {
         ),
       }}
     >
-      <Search setCity={setCity} error={error} />
+      <Search city={city} setCity={setCity} error={error} />
 
       {weatherData && weatherData.length > 0 ? (
         <CurrentWeather weatherData={weatherData} isDayTime={isDayTime} />
@@ -142,6 +162,8 @@ function App() {
         <EmptyState />
         // createH1ElementsFromArray(weatherData)
       )}
+      <AllDayWeather list={weatherData}  />
+      
     </Section>
   );
 }

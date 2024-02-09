@@ -5,8 +5,8 @@ const SearchSection = styled.section`
   // width: 380px;
   grid-column: 1/3;
   grid-row: 1/2;
-  margin-left:30px;
-  margin-right:30px;
+  margin-left: 30px;
+  margin-right: 30px;
   //padding-left:10px;
   //border: 5px solid var(--colour-black);
   // height: 35px;
@@ -29,7 +29,7 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
   height: 40px;
-  width:165px;
+  width: 165px;
   max-height: 40px;
   padding-inline: 24px;
   margin: 0; /* Μηδενισμός των περιθωρίων */
@@ -43,12 +43,12 @@ const Input = styled.input`
   padding-left: 10px;
 
   @media screen and (min-width: 600px) {
-    // width: 294px;
+    width: 294px;
   }
 `;
 const Button = styled.button`
   font-size: 13px;
-  width:80px;
+  width: 80px;
   background-color: rgba(0, 0, 0, 0);
   margin: 0;
   //padding-inline: 24px;
@@ -68,17 +68,17 @@ const Button = styled.button`
   }
 
   @media screen and (min-width: 600px) {
-    // width: 97px;
+    width: 90px;
     // margin-left: 27px;
   }
 `;
 
-const ErrorMessage=styled.p`
-color: var(--colour-orange);
-font-size:var( p--m);
-`
+const ErrorMessage = styled.p`
+  color: var(--colour-orange);
+  font-size: var(p--m);
+`;
 
-export default function Search({ setCity,error }) {
+export default function Search({ setCity, error,city }) {
   const [citySearch, setCitySearch] = useState("");
 
   const handleClick = () => {
@@ -94,7 +94,7 @@ export default function Search({ setCity,error }) {
             setCitySearch(e.target.value);
           }}
         />
-        <Button onClick={handleClick}>Search</Button>
+        <Button onClick={handleClick}   >Search</Button>
       </InputWrapper>
       <ErrorMessage>{error}</ErrorMessage>
     </SearchSection>
