@@ -12,9 +12,10 @@ const Section = styled.section`
   //overflow: hidden;
   box-sizing: border-box;
   min-height: 100vh;
+
   max-width: 100vw;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr 21fr;
+  grid-template-rows: 100px 1fr 2fr;
 
   //border: 3px solid var(--colour-yellow);
   padding-top: 30px;
@@ -53,7 +54,7 @@ function App() {
     console.log(b);
   }
 
-  useEffect(() => { 
+  useEffect(() => {
     const fetchWeatherData = async () => {
       try {
         if (city && city.length > 3) {
@@ -76,7 +77,7 @@ function App() {
           let timezone = fetchedData.city.timezone;
           let dt = fetchedData.list[0].dt;
           let dttxt = fetchedData.list[0].dt_txt;
-         // time1(dt, timezone, dttxt);
+          // time1(dt, timezone, dttxt);
           // time();city.timezone
         } else if (city && city.length <= 3) {
           setWeatherData([]);
@@ -162,8 +163,9 @@ function App() {
         <EmptyState />
         // createH1ElementsFromArray(weatherData)
       )}
-     {weatherData && weatherData.length > 0 && <AllDayWeather list={weatherData} isDayTime={isDayTime} />}
-      
+      {weatherData && weatherData.length > 0 && (
+        <AllDayWeather list={weatherData} isDayTime={isDayTime} />
+      )}
     </Section>
   );
 }

@@ -22,17 +22,17 @@ import veryRainyNight from "../images/mini-icons/night/very_rainy.png";
 
 const Section = styled.section`
   grid-row: 3/4;
-
   display: flex;
   margin-top: 15px;
   flex-direction: column;
   // justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 30px;
+  // margin-left: 10px;
+  // padding-right: 30px;
 `;
 const TemperatureWrapper = styled.div`
   display: flex;
   flex-direction: column;
+ // margin-left: 10px;
 `;
 
 export default function AllDayWeather({ list, isDayTime }) {
@@ -63,17 +63,26 @@ export default function AllDayWeather({ list, isDayTime }) {
   function createH1ElementsFromArray(list) {
     const data = list.slice(1, 8);
 
-    return data.map((item) => {
+    return data.map((item, index) => {
       let time = item.dt_txt.substring(11, 16);
       let temp = item.main.temp;
       let tempFeel = item.main.feels_like;
-      let icon=getIcon(item.weather[0].id,isDayTime)
+      let icon = getIcon(item.weather[0].id, isDayTime);
+      let aaaa = getComputedStyle(document.documentElement).getPropertyValue(
+        "--colour-white-transparent"
+      );
+
       return (
         <div
           style={{
+          //width: "100%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            marginBottom: "15px",
+            backgroundColor: aaaa,
+            paddingLeft: '10px',
+          paddingRight: '30px'
           }}
         >
           <TemperatureWrapper>
