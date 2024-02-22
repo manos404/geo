@@ -25,24 +25,21 @@ import veryRainyNightAnim from "../images/animated-icons/night/very_rainy.json";
 const SectionCurrentWeather = styled.div`
   grid-column: 1/2;
   grid-row: 2/3;
- // width:100%;
-  //padding-left:35px;
-  //padding-right:35px;
-  margin-left:10px;
-  margin-right:30px;
+
+  padding-left: 10px;
+  padding-right: 20px;
+
+  overflow: hidden;
+
+  @media screen and (min-width: 600px) {
+    //margin-right: 80px;
+  }
 `;
 const WeatherOverview = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
-  //margin-bottom: 40px;
-
-  // grid-template-rows: auto 1fr 1fr;
-
-  // padding: 10px;
-  // border: 2px solid var(--colour-black);
-
-  // //justify-content: space-around;
+  justify-content: space-between;
 
   // @media screen and (min-width: 600px) {
   //   margin-top: 64px;
@@ -55,25 +52,44 @@ const WeatherOverview = styled.div`
 const H2 = styled.h2`
   writing-mode: vertical-rl; /* Κείμενο κατακόρυφα, από δεξιά προς τα αριστερά */
   text-orientation: upright;
+  letter-spacing: 5px;
+  color: ${(props) =>
+    !props.$isDayTime ? "var(--colour-white)" : "var(--colour-black)"};
 `;
 
 const DivIconWrapper = styled.div`
   border-top: 2px solid var(--colour-black);
   padding-top: 40px;
- 
+  max-width: 500px;
 `;
 
-const Temp = styled.div`
+const TemperatureWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 5px;
 `;
 const P = styled.p`
-  color: var(--colour-gray);
+  color: ${(props) =>
+    props.$isDayTime
+      ? props.$check
+        ? "var(--colour-gray)"
+        : "var(--colour-white)"
+      : "var(--colour-black)"};
+  
+`;
+const Temp = styled.h1`
+  color: ${(props) =>
+    !props.$isDayTime ? "var(--colour-white)" : "var(--colour-black)"};
+`;
+
+const TempFeel = styled.h2`
+  color: ${(props) =>
+    !props.$isDayTime ? "var(--colour-white)" : "var(--colour-black)"};
 `;
 
 export default function CurrentWeather({ weatherData, isDayTime }) {
-  console.log(weatherData[0]);
+ // console.log(weatherData[0]);
 
   const getAnimatedIcon = (weatherId, isDayTime) => {
     if (weatherId > 200 && weatherId <= 232) {
@@ -100,24 +116,42 @@ export default function CurrentWeather({ weatherData, isDayTime }) {
   return (
     <SectionCurrentWeather>
       <WeatherOverview>
-        <H2>{weatherData[0].weather[0].description}</H2>
+        <H2 $isDayTime={isDayTime}>{weatherData[0].weather[0].description}</H2>
 
         <DivIconWrapper>
           <Lottie
-            animationData={getAnimatedIcon(weatherData[0].weather[0].id,isDayTime)}
+            animationData={getAnimatedIcon(
+              weatherData[0].weather[0].id,
+              isDayTime
+            )}
             loop={true}
           />
         </DivIconWrapper>
       </WeatherOverview>
 
-      <Temp>
-        <P> TEMPERATURE</P>
-        <h1>{Math.floor(weatherData[0].main.temp)}°C</h1>
-      </Temp>
-      <Temp>
-        <P> FEELS LIKE</P>
-        <h2>{Math.floor(weatherData[0].main.feels_like)}°C</h2>
-      </Temp>
+      <TemperatureWrapper>
+        <P
+        className="p--lg"
+          $isDayTime={isDayTime}
+          $check={weatherData[0].weather[0].main === "Clouds"}
+        >
+          TEMPERATURE
+        </P>
+        <Temp $isDayTime={isDayTime}>
+          {Math.floor(weatherData[0].main.temp)}°C
+        </Temp>
+      </TemperatureWrapper>
+      <TemperatureWrapper>
+        <P className="p--lg"
+          $isDayTime={isDayTime}
+          $check={weatherData[0].weather[0].main === "Clouds"}
+        >
+          FEELS LIKE
+        </P>
+        <TempFeel $isDayTime={isDayTime}>
+          {Math.floor(weatherData[0].main.feels_like)}°C
+        </TempFeel>
+      </TemperatureWrapper>
     </SectionCurrentWeather>
   );
 }

@@ -6,29 +6,34 @@ import Search from "./components/Search";
 import CurrentWeather from "./components/CurrentWeather";
 import EmptyState from "./components/EmptyState";
 import AllDayWeather from "./components/AllDayWeather";
+import { RFC_2822 } from "moment-timezone";
 
 const Section = styled.section`
   display: grid;
-  //overflow: hidden;
+  // overflow: hidden;
   box-sizing: border-box;
   min-height: 100vh;
 
   max-width: 100vw;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 1fr 2fr;
+  grid-template-rows: 100px 1fr auto;
 
-  //border: 3px solid var(--colour-yellow);
   padding-top: 30px;
   background-color: var(--colour-beige);
 
+  @media screen and (min-width: 600px) {
+    //grid-template-rows: minmax(140px, 180px) 1fr 1fr;
+    padding: 30px 60px 60px;
+  }
   @media screen and (min-width: 768px) {
-    grid-template-rows: minmax(140px, 180px) 1fr 1fr;
+    // grid-template-rows: minmax(140px, 180px) 1fr 1fr;
+    grid-template-rows: 100px 3fr 1fr;
     padding: 30px 60px 60px;
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1000px) {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 160px 1fr;
+    grid-template-rows: 100px 1fr;
     padding: 50px 100px 100px;
   }
 `;
@@ -38,20 +43,27 @@ function App() {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [isDayTime, setIsDayTime] = useState(true);
-  //console.log("app");
 
   const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=03743e7ef23f3b59fd9b137e2fe8a91e&units=metric`;
 
   function time1(dt, timezone, dttxt) {
-    console.log("time");
+     
     console.log(dt);
     console.log(timezone);
     console.log(dttxt);
-    let format = "hh:mm a";
-    let a = DateTime.fromSeconds(dt).setZone(timezone).toFormat(format);
-    console.log(a);
-    let b = DateTime.fromISO("2024-02-07 12:00:00").toFormat("yyyy LLL dd");
-    console.log(b);
+     
+    const format  = 'yyyy-MM-dd HH:mm:ss';
+    const dateTime = DateTime.fromFormat(dttxt, format );
+    console.log(dateTime);
+    const hour = dateTime.hour;
+    console.log(hour);
+    let h= hour-2+timezone/60/60
+    console.log(h);
+    setIsDayTime (hour >= Number("06") && hour < Number("21") )
+    const timestamp = 1708549200 * 1000; // Το timestamp πρέπει να είναι σε millisecond, οπότε πολλαπλασιάζουμε με 1000
+const date = new Date(timestamp);
+
+console.log(date);
   }
 
   useEffect(() => {
@@ -77,7 +89,7 @@ function App() {
           let timezone = fetchedData.city.timezone;
           let dt = fetchedData.list[0].dt;
           let dttxt = fetchedData.list[0].dt_txt;
-          // time1(dt, timezone, dttxt);
+          time1(dt, timezone, dttxt);
           // time();city.timezone
         } else if (city && city.length <= 3) {
           setWeatherData([]);
@@ -99,24 +111,16 @@ function App() {
     isDayTimeAtDestination();
   }, [weatherData]);
 
-  // function createH1ElementsFromArray(weatherData) {
-  //   const data = weatherData.list.slice(1, 8);
-  //   // console.log( data );
-  //   return data.map((item, index) => <AllDayWeather key={index} list={item} />);
-  // }
-
   const isDayTimeAtDestination = () => {
     // logic... use timezone etc.
     // const isDayTime = time >= Number("06") && time < Number("21");
     // console.log("isDayTime", isDayTime);
-
     // console.log("time in LA", format(new Date(1706734800), "MM/dd/yyyy"));
     // console.log("time in LA ISO", parseISO("2024-01-31 21:00:00"));
-
     //const timeDifference = weatherData?.city.timezone;
     // console.log("timeDifference", timeDifference);
-
-    setIsDayTime(true);
+    // console.log(weatherData[0].dt_txt);
+    // setIsDayTime(true);
   };
 
   function getColor(weatherDescription) {
@@ -155,7 +159,12 @@ function App() {
         ),
       }}
     >
-      <Search city={city} setCity={setCity} error={error} />
+      <Search
+        city={city}
+        setCity={setCity}
+        error={error}
+        isDayTime={isDayTime}
+      />
 
       {weatherData && weatherData.length > 0 ? (
         <CurrentWeather weatherData={weatherData} isDayTime={isDayTime} />
