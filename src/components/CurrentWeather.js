@@ -1,9 +1,5 @@
-import { useState } from "react";
 import styled from "styled-components";
-import sss from "../images/clearLargeDay.png";
 import Lottie from "lottie-react";
-import WeatherState from "./WeatherState";
-
 import clearDayAnim from "../images/animated-icons/day/clear.json";
 import cloudyDayAnim from "../images/animated-icons/day/cloudy.json";
 import foggyDayAnim from "../images/animated-icons/day/foggy.json";
@@ -25,28 +21,16 @@ import veryRainyNightAnim from "../images/animated-icons/night/very_rainy.json";
 const SectionCurrentWeather = styled.div`
   grid-column: 1/2;
   grid-row: 2/3;
-
   padding-left: 10px;
   padding-right: 20px;
-
   overflow: hidden;
-
-  @media screen and (min-width: 600px) {
-    //margin-right: 80px;
-  }
+ 
 `;
 const WeatherOverview = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
   justify-content: space-between;
-
-  // @media screen and (min-width: 600px) {
-  //   margin-top: 64px;
-  // }
-  // @media screen and (min-width: 1200px) {
-  //   max-width: 50%;
-  // }
 `;
 
 const H2 = styled.h2`
@@ -76,7 +60,6 @@ const P = styled.p`
         ? "var(--colour-gray)"
         : "var(--colour-white)"
       : "var(--colour-black)"};
-  
 `;
 const Temp = styled.h1`
   color: ${(props) =>
@@ -89,8 +72,6 @@ const TempFeel = styled.h2`
 `;
 
 export default function CurrentWeather({ weatherData, isDayTime }) {
- // console.log(weatherData[0]);
-
   const getAnimatedIcon = (weatherId, isDayTime) => {
     if (weatherId > 200 && weatherId <= 232) {
       return isDayTime ? stormyDayAnim : stormyNightAnim;
@@ -131,7 +112,7 @@ export default function CurrentWeather({ weatherData, isDayTime }) {
 
       <TemperatureWrapper>
         <P
-        className="p--lg"
+          className="p--lg"
           $isDayTime={isDayTime}
           $check={weatherData[0].weather[0].main === "Clouds"}
         >
@@ -142,7 +123,8 @@ export default function CurrentWeather({ weatherData, isDayTime }) {
         </Temp>
       </TemperatureWrapper>
       <TemperatureWrapper>
-        <P className="p--lg"
+        <P
+          className="p--lg"
           $isDayTime={isDayTime}
           $check={weatherData[0].weather[0].main === "Clouds"}
         >

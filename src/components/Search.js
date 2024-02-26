@@ -2,22 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const SearchSection = styled.section`
-  // width: 380px;
   grid-column: 1/3;
   grid-row: 1/2;
   margin-left: 15px;
   margin-right: 30px;
-  //padding-left:10px;
-  //border: 5px solid var(--colour-black);
-  // height: 35px;
-  // margin-left: 34px;
-  @media screen and (min-width: 600px) {
-    //margin-left: 101px;
-    // width: 418px;
-    // height: 39px;
-  }
-  @media screen and (min-width: 1200px) {
-  }
 `;
 
 const InputWrapper = styled.div`
@@ -55,7 +43,7 @@ const Button = styled.button`
   width: 80px;
   background-color: var(--colour-white);
   margin: 0;
-  //padding-inline: 24px;
+
   min-height: 40px;
   height: 40px;
   border-radius: 40px;
@@ -73,7 +61,6 @@ const Button = styled.button`
 
   @media screen and (min-width: 600px) {
     width: 90px;
-    // margin-left: 27px;
   }
 `;
 

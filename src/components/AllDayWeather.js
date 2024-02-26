@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import aaa from "../images/mini-icons/day/clear.png";
 import { useMediaQuery } from "@mui/material";
 import clearDay from "../images/mini-icons/day/clear.png";
 import cloudyDay from "../images/mini-icons/day/cloudy.png";
@@ -10,7 +9,6 @@ import snowyDay from "../images/mini-icons/day/snowy.png";
 import stormyDay from "../images/mini-icons/day/stormy.png";
 import veryCloudyDay from "../images/mini-icons/day/very_cloudy.png";
 import veryRainyDay from "../images/mini-icons/day/very_rainy.png";
-
 import clearNight from "../images/mini-icons/night/clear.png";
 import cloudyNight from "../images/mini-icons/night/cloudy.png";
 import foggyNight from "../images/mini-icons/night/foggy.png";
@@ -37,31 +35,9 @@ const Section = styled.section`
     margin: auto;
   }
 `;
-const Wrapper = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: space-between;
-
-  // align-items: center;
-
-  @media screen and (min-width: 400px) {
-  }
-
-  @media screen and (min-width: 700px) {
-    // background-color:red;
-    flex-direction: column;
-
-    justify-content: flex-start;
-  }
-  @media screen and (min-width: 1000px) {
-    flex-direction: row;
-    justify-content: center; ////
-  }
-`;
+ 
 const TemperatureWrapper = styled.div`
   display: grid;
-
-  // height: 90px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding-left: 15px;
@@ -71,8 +47,7 @@ const TemperatureWrapper = styled.div`
 
   @media screen and (min-width: 700px) {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto 1fr;
-    // grid-auto-flow: row; /* Αναδιατάσσει τα στοιχεία σε γραμμές */
+    grid-template-rows: 1fr auto 1fr; 
   }
   @media screen and (min-width: 1000px) {
     grid-template-columns: 1fr 1fr 1fr;
@@ -167,7 +142,6 @@ export default function AllDayWeather({ list, isDayTime }) {
 
   function createH1ElementsFromArray(list) {
     const data = list.slice(1, 8);
-
     return data.map((item, index) => {
       let time = item.dt_txt.substring(11, 16);
       let temp = item.main.temp;
@@ -181,6 +155,7 @@ export default function AllDayWeather({ list, isDayTime }) {
           : "";
       return (
         <TemperatureWrapper
+        key={index}
           style={{ backgroundColor: isWindowLessThan700 ? color : "" }}
         >
           <Time
