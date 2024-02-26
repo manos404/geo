@@ -46,9 +46,7 @@ function App() {
   function time1(dt, timezone, dttxt) {
     const format = "yyyy-MM-dd HH:mm:ss";
     const dateTime = DateTime.fromFormat(dttxt, format);
-    console.log(dateTime);
     const hour = dateTime.hour;
-    console.log(hour);
     setIsDayTime(hour >= Number("06") && hour < Number("21"));
   }
 
@@ -66,7 +64,6 @@ function App() {
           setError(null);
           const fetchedData = await response.json();
           setWeatherData(fetchedData.list);
-          console.log(fetchedData);
           let timezone = fetchedData.city.timezone;
           let dt = fetchedData.list[0].dt;
           let dtTxt = fetchedData.list[0].dt_txt;
