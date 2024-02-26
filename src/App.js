@@ -41,7 +41,7 @@ function App() {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [isDayTime, setIsDayTime] = useState(true);
-  const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=03743e7ef23f3b59fd9b137e2fe8a91e&units=metric`;
+  const endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&APPID=${process.env.REACT_APP_API_KEY}&units=metric`;
 
   function time1(dt, timezone, dttxt) {
     const format = "yyyy-MM-dd HH:mm:ss";
