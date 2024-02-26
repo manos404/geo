@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+
+
+![clear](https://github.com/manos404/geo/assets/152051892/82d87c43-1351-4fa2-a544-ccaadb6e34a3)
+
+
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
