@@ -2,6 +2,7 @@
  [Try it here](https://geo-atjz.onrender.com)
  
  ![image](https://s6.ezgif.com/tmp/ezgif-6-9b4fc371be.gif)
+ 
 This is a responsive web application built using React and styled-components. It captures user input to provide real-time weather data through a weather API. The application utilizes conditional rendering and employs Lottie JS for animating icons to enhance user experience.
 
 ## Features
